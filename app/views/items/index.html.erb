@@ -1,0 +1,39 @@
+<h1>Grocery List</h1>
+<div class="new-item-form">
+<h4>add a new item</h4>
+<%= form_for(@item) do |f| %>  
+  <div class="field"> 
+    <%= f.text_field :content %><br> 
+    <%= f.text_area :notes %> 
+  </div> 
+  <div class="actions"> 
+    <%= f.submit "Add" %> 
+  </div> 
+<% end %> 
+</div>
+<div class="content-container">
+<div class="incomplete-items">
+<% @items.each do |item| %> 
+  <% if item.is_complete == false%>
+  <div class="message" style="border: 1px solid black"> 
+    <p class="content"><%= item.content %></p> 
+    <p class="note"><%= item.notes %></p> 
+    <%= link_to 'edit', 'edit/' + item.id.to_s %>
+    <%= link_to item.is_complete ? "mark incomplete" : "mark complete", 'edit/' + item.id.to_s, method: :put%>
+  </div> 
+  <%end%>
+  <% end %>
+</div>
+<div class="complete-items">
+<% @items.each do |item| %> 
+  <% if item.is_complete == true%>
+  <div class="message" style="border: 1px solid black"> 
+    <p class="content"><%= item.content %></p> 
+    <p class="notes"><%= item.notes %></p> 
+    <%= link_to 'edit', 'edit/' + item.id.to_s %>
+    <%= link_to item.is_complete ? "mark incomplete" : "mark complete", 'edit/' + item.id.to_s, method: :put%>
+  </div> 
+  <%end%>
+  <% end %>
+</div>
+</div>

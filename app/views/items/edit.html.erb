@@ -1,0 +1,11 @@
+<p>this is the edit screen</p>
+<hr>
+<%= form_for(@item) do |f| %>  
+  <div class="field"> 
+    <%= f.text_field :content %><br> 
+    <%= f.text_area :notes %> 
+  </div> 
+  <div class="actions"> 
+    <%= f.submit "Edit" %> 
+  </div> 
+<% end %> 

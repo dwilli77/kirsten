@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a basic grocery/todo list
 
-Things you may want to cover:
+in order to run locally, you must have Ruby on Rails on your machine
 
-* Ruby version
+if so, here's how you check it out:
 
-* System dependencies
+- clone the repo
 
-* Configuration
+- run `bundle install`
 
-* Database creation
+- start the Rails server with `rails server`
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- navigate to localhost:3000

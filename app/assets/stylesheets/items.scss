@@ -1,3 +1,253 @@
 // Place all the styles related to the Items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  box-sizing: border-box;
+  background: #ccc;
+  font-family: Helvetica, sans-serif;
+  .container {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    border: 3px solid greenyellow;
+    border-radius: 15px;
+    box-shadow: 7px 7px 6px #000;
+    background: #fff;
+    padding-bottom: 25px;
+    .top-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      h1 {
+        margin-top: 0;
+        border-top-left-radius: 13px;
+        border-top-right-radius: 13px;
+        background: navy;
+        padding: 10px;
+        color: #eee;
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+      #clear-all {
+        position: absolute;
+        top: 70px;
+        right: 15px;
+        padding: 10px 18px;
+        border-radius: 500px;
+        font-size: 16px;
+        border: 2px solid #dc3446;
+        color: #fff;
+        background: #dc3446;
+        &:hover {
+          background: #fff;
+          color: #dc3446;
+          cursor: pointer;
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+      h4 {
+        margin-top: 0;
+        margin-bottom: 5px;
+        text-align: center;
+        text-decoration: underline;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .actions {
+          margin-top: 4px;
+          input {
+            font-size: 18px;
+            border: 2px solid orange;
+            color: darkorange;
+            padding: 7px 15px;
+            border-radius: 500px;
+            &:hover {
+              background: orange;
+              color: #fff;
+              cursor: pointer;
+            }
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+        .field {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        #item_content {
+          width: 200px;
+          height: 2.5rem;
+          font-size: 16px;
+          color: #222;
+          border-radius: 500px;
+          border: 2px solid orange;
+          padding-left: 10px;
+          &:focus {
+            outline: none;
+            border: 2px solid darkorange;
+          }
+        }
+        #item_notes {
+          width: 300px;
+          height: 4rem;
+          color: #222;
+          border-radius: 10px;
+          font-size: 14px;
+          border: 2px solid orange;
+          margin-top: 5px;
+          padding-top: 5px;
+          padding-left: 5px;
+          &:focus {
+            outline: none;
+            border: 2px solid darkorange;
+          }
+        }
+      }
+    }
+    .content-container {
+      margin: 10px 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      p {
+        margin-top: 0;
+      }
+      h3 {
+        margin-top: 0;
+        margin-bottom: 3px;
+        text-align: center;
+        background: navy;
+        color: #eee;
+        padding: 6px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        position: relative;
+        top: -1px;
+      }
+      .complete-items,
+      .incomplete-items {
+        width: 350px;
+        border: 2px solid #222;
+        box-shadow: 3px 3px 2px #aaa;
+        border-radius: 10px;
+        .box {
+          margin: 0 8px 5px 8px;
+          border-bottom: 1px solid #ccc;
+          position: relative;
+          padding-bottom: 4px;
+          .content {
+            font-size: 18px;
+            margin-bottom: 10px;
+          }
+          .note {
+            font-size: 14px;
+            color: #999;
+          }
+          .btn {
+            font-size: 16px;
+            text-decoration: none;
+            color: orange;
+          }
+          .delete {
+            position: absolute;
+            right: 5px;
+            top: 0px;
+          }
+          .edit {
+            font-size: 14px;
+          }
+          .mark_complete {
+            float: right;
+            font-size: 14px;
+          }
+        }
+        .completed {
+          border-radius: 5px;
+          background-image: linear-gradient(to bottom right, #fff, #ccc);
+          .content {
+            text-decoration: line-through;
+            color: #555;
+          }
+        }
+      }
+    }
+  }
+
+  .modal {
+    position: fixed;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    top: 100px;
+    width: 400px;
+    background: #ffe6e6;
+    border-radius: 20px;
+    border: 2px solid #222;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+    box-shadow: 4px 4px 3px #111;
+    z-index: 16;
+    .modal-top {
+      height: 35px;
+      width: 100.1%;
+      background: navy;
+      margin-bottom: 10px;
+      border-top-left-radius: 18px;
+      border-top-right-radius: 17px;
+    }
+    .modal-cancel {
+      font-size: 14px;
+      border: 2px solid #6c757d;
+      color: #6c757d;
+      background: #fff;
+      margin-right: 10px;
+      padding: 5px 8px;
+      border-radius: 500px;
+      &:hover {
+        background: #6c757d;
+        color: #eee;
+        cursor: pointer;
+      }
+    }
+    .clear-button {
+      font-size: 14px;
+      text-decoration: none;
+      border: 2px solid #dc3446;
+      color: #dc3446;
+      background: #fff;
+      padding: 5px 8px;
+      border-radius: 500px;
+      &:hover {
+        background: #dc3446;
+        color: #eee;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .display-none {
+    display: none;
+  }
+
+  .grey-out {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 15;
+    background: rgba(108, 117, 125, 0.8);
+  }
+}

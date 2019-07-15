@@ -33,4 +33,15 @@ class ItemsController < ApplicationController
     Item.update(@item.id, is_complete: !@item[:is_complete])
     redirect_to '/'
   end
+
+  def delete
+    @item = Item.find(params[:id])
+    Item.destroy(@item.id)
+    redirect_to '/'
+  end
+
+  def delete_all_items
+    Item.delete_all
+    redirect_to '/'
+  end
 end

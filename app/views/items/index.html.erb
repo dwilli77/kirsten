@@ -1,39 +1,71 @@
-<h1>Grocery List</h1>
-<div class="new-item-form">
-<h4>add a new item</h4>
-<%= form_for(@item) do |f| %>  
-  <div class="field"> 
-    <%= f.text_field :content %><br> 
-    <%= f.text_area :notes %> 
-  </div> 
-  <div class="actions"> 
-    <%= f.submit "Add" %> 
-  </div> 
-<% end %> 
+<div class="container">
+<div id="grey-out" onclick="closeModal()"></div>
+  <div class="top-container">
+    <h1>Grocery List</h1>
+    <button id="clear-all">Clear All Items</button>
+    <div class="new-item-form">
+      <h4>add a new item</h4>
+      <%= form_for(@item) do |f| %>  
+        <div class="field"> 
+          <%= f.text_field :content, placeholder: "item name" %>
+          <%= f.text_area :notes, placeholder: "add notes (optional)..." %> 
+        </div> 
+        <div class="actions"> 
+          <%= f.submit "Add" %> 
+        </div> 
+      <% end %> 
+    </div>
+  </div>
+  <div class="content-container">
+    <div class="incomplete-items">
+    <h3>Items Needed</h3>
+      <% @items.each do |item| %> 
+      <% if item.is_complete == false%>
+        <div class="box"> 
+          <p class="content"><%= item.content %></p> 
+          <p class="note"><%= item.notes %></p> 
+          <%= link_to 'edit', 'edit/' + item.id.to_s, class: "btn edit" %>
+          <%= link_to item.is_complete ? "mark incomplete" : "mark complete", 'edit/' + item.id.to_s, method: :put, class: "btn mark_complete"%>
+          <%= link_to "x", 'edit/' + item.id.to_s, method: :delete, class: "btn delete"%>
+        </div> 
+      <%end%>
+      <% end %>
+    </div>
+    <div class="complete-items">
+    <h3>Items Completed</h3>
+      <% @items.each do |item| %> 
+        <% if item.is_complete == true%>
+        <div class="box completed"> 
+          <p class="content"><%= item.content %></p> 
+          <p class="note"><%= item.notes %></p> 
+          <%= link_to 'edit', 'edit/' + item.id.to_s, class: "btn edit" %>
+          <%= link_to item.is_complete ? "mark incomplete" : "mark complete", 'edit/' + item.id.to_s, method: :put, class: "btn mark_complete"%>
+          <%= link_to "x", 'edit/' + item.id.to_s, method: :delete, class: "btn delete"%>
+        </div> 
+        <%end%>
+      <% end %>
+    </div>
+  </div>
+  <div class="modal display-none" id="modal">
+    <div class="modal-top"></div>
+   <p>Are you sure you want to clear all the items?</p>
+   <div class="modal-button-box">
+    <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+    <%= link_to "Clear", "/", method: :delete, class: "clear-button"%>
+    </div>
+  </div>
 </div>
-<div class="content-container">
-<div class="incomplete-items">
-<% @items.each do |item| %> 
-  <% if item.is_complete == false%>
-  <div class="message" style="border: 1px solid black"> 
-    <p class="content"><%= item.content %></p> 
-    <p class="note"><%= item.notes %></p> 
-    <%= link_to 'edit', 'edit/' + item.id.to_s %>
-    <%= link_to item.is_complete ? "mark incomplete" : "mark complete", 'edit/' + item.id.to_s, method: :put%>
-  </div> 
-  <%end%>
-  <% end %>
-</div>
-<div class="complete-items">
-<% @items.each do |item| %> 
-  <% if item.is_complete == true%>
-  <div class="message" style="border: 1px solid black"> 
-    <p class="content"><%= item.content %></p> 
-    <p class="notes"><%= item.notes %></p> 
-    <%= link_to 'edit', 'edit/' + item.id.to_s %>
-    <%= link_to item.is_complete ? "mark incomplete" : "mark complete", 'edit/' + item.id.to_s, method: :put%>
-  </div> 
-  <%end%>
-  <% end %>
-</div>
-</div>
+
+<script>
+  document.getElementsByTagName("form")[0].setAttribute("autocomplete", "off");
+
+  document.getElementById("clear-all").addEventListener("click", function () {
+    document.getElementById("modal").classList.remove("display-none");
+    document.getElementById("grey-out").classList.add("grey-out");
+  })
+
+  function closeModal() {
+    document.getElementById("modal").classList.add("display-none");
+    document.getElementById("grey-out").classList.remove("grey-out")
+  }
+</script>

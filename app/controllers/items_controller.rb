@@ -15,6 +15,8 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     if @item.save
       redirect_to '/'
+    else
+      redirect_to '/'
     end
   end
 
